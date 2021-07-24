@@ -34,6 +34,9 @@ class ViewPagerFragment:Fragment() {
         val view:View = inflater.inflate(R.layout.fragment_viewpager,container,false)
 
         val ingredientsFragment = IngredientsFragment()
+        val bundle = Bundle()
+        bundle.putInt(KEY_RECIPE_INDEX,index)
+        ingredientsFragment.arguments = bundle
 
         val directionsFragment = DirectionsFragment()
 
@@ -54,7 +57,7 @@ class ViewPagerFragment:Fragment() {
 
         val tablayout = view.findViewById<TabLayout>(R.id.tablayout)
 
-        tablayout.setTabTextColors(Color.GRAY,Color.WHITE)
+        tablayout.setTabTextColors(Color.DKGRAY,Color.WHITE)
         TabLayoutMediator(tablayout,viewpager){tab, position ->
             tab.text = if (position == 0) "Ingredients" else "Directions"
 
