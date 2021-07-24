@@ -8,15 +8,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.glencconnnect.bakingapp.R
-import com.glencconnnect.bakingapp.adapters.ListAdapter
+import com.glencconnnect.bakingapp.adapters.GridAdapter
 
-class ListFragment : Fragment(){
+class GridFragment : Fragment(){
 
-    interface OnRecipeSelectedInterface {
-        fun onRecipeSelected(index:Int)
+    interface OnGridRecipeSelectedInterface {
+        fun onGridRecipeSelected(index:Int)
     }
 
     override fun onCreateView(
@@ -25,13 +26,16 @@ class ListFragment : Fragment(){
         savedInstanceState: Bundle?
     ): View? {
 
-        val listener: OnRecipeSelectedInterface? = activity as OnRecipeSelectedInterface
+        val listener: OnGridRecipeSelectedInterface = activity as OnGridRecipeSelectedInterface
         var view:View = inflater.inflate(R.layout.fragment_list,container,false)
 
         val recyclerView: RecyclerView = view.findViewById(R.id.recyclerview)
-        val adapter = ListAdapter(listener)
+        val adapter = GridAdapter(listener)
         recyclerView.adapter = adapter
-        val linearLayoutManager:LinearLayoutManager = LinearLayoutManager(activity)
+        val displayMetrics = resources.displayMetrics
+        val dpWidth = displayMetrics.widthPixels / displayMetrics.density
+        var num_of_columns = (dpWidth / 200) as Int
+        val linearLayoutManager:LinearLayoutManager = GridLayoutManager(activity, num_of_columns)
         recyclerView.layoutManager = linearLayoutManager
 
 

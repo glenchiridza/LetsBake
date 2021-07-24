@@ -3,57 +3,21 @@
  **/
 package com.glencconnnect.bakingapp.adapters
 
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.fragment.app.FragmentActivity
-import androidx.recyclerview.widget.RecyclerView
 import com.glencconnnect.bakingapp.R
 import com.glencconnnect.bakingapp.fragments.ListFragment
-import com.glencconnnect.bakingapp.models.Recipe
 
-class ListAdapter(var listener: ListFragment.OnRecipeSelectedInterface?) : RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
+class ListAdapter(var listener: ListFragment.OnRecipeSelectedInterface?) :RecyclerAdapter() {
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-        val view:View = LayoutInflater.from(parent.context).inflate(R.layout.list_item,parent,false)
-        return ListViewHolder(view)
+    override fun getLayoutID(): Int {
+        return R.layout.list_item
+    }
+
+    override fun onRecipeSelected(index: Int) {
+        listener!!.onRecipeSelected(index)
     }
 
 
 
-    override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-        holder.bindView(position)
-    }
-
-    override fun getItemCount(): Int {
-        return Recipe.names.size
-    }
-
-
-    inner class ListViewHolder(itemView:View): RecyclerView.ViewHolder(itemView), View.OnClickListener{
-
-
-        private var recipeText: TextView = itemView.findViewById(R.id.tv_recipe_name)
-        private var recipeImage: ImageView = itemView.findViewById(R.id.tv_recipe_image)
-
-
-        init {
-            itemView.setOnClickListener(this)
-        }
-
-        fun bindView(pos:Int){
-
-            recipeText.text = Recipe.names[pos]
-            recipeImage.setImageResource(Recipe.resourceIds[pos])
-        }
-        override fun onClick(view: View?) {
-
-            listener!!.onRecipeSelected(adapterPosition)
-        }
-
-    }
 
 }
