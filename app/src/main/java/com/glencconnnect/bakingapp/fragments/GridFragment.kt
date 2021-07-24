@@ -44,4 +44,8 @@ class GridFragment : Fragment(){
     }
 
 
+    override fun onStop() {
+        activity?.title = resources.getString(R.string.app_name)
+        super.onStop()
+    }
 }

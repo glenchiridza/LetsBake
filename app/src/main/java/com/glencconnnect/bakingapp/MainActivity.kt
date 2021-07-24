@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity(),ListFragment.OnRecipeSelectedInterface,
     }
 
     override fun onGridRecipeSelected(index: Int) {
-        val fragment = ViewPagerFragment()
+        val fragment = GridFragment()
         val bundle = Bundle()
         bundle.putInt(ViewPagerFragment.KEY_RECIPE_INDEX,index)
         fragment.arguments = bundle
