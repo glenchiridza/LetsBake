@@ -34,11 +34,15 @@ class ViewPagerFragment:Fragment() {
         val view:View = inflater.inflate(R.layout.fragment_viewpager,container,false)
 
         val ingredientsFragment = IngredientsFragment()
-        val bundle = Bundle()
+        var bundle = Bundle()
         bundle.putInt(KEY_RECIPE_INDEX,index)
         ingredientsFragment.arguments = bundle
 
         val directionsFragment = DirectionsFragment()
+        bundle = Bundle()
+        bundle.putInt(KEY_RECIPE_INDEX,index)
+        directionsFragment.arguments = bundle
+
 
         val viewpager = view.findViewById<ViewPager2>(R.id.viewpager)
 
