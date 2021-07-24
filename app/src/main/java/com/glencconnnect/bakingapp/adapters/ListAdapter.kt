@@ -37,11 +37,13 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
         private var recipeText: TextView = itemView.findViewById(R.id.tv_recipe_name)
         private var recipeImage: ImageView = itemView.findViewById(R.id.tv_recipe_image)
 
+
         init {
             itemView.setOnClickListener(this)
         }
 
         fun bindView(pos:Int){
+
             recipeText.text = Recipe.names[pos]
             recipeImage.setImageResource(Recipe.resourceIds[pos])
         }
