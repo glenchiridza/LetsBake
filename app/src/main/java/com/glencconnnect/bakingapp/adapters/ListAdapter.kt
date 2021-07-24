@@ -8,12 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.glencconnnect.bakingapp.R
+import com.glencconnnect.bakingapp.fragments.ListFragment
 import com.glencconnnect.bakingapp.models.Recipe
 
-class ListAdapter: RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
-
+class ListAdapter(var listener: ListFragment.OnRecipeSelectedInterface?) : RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
@@ -31,7 +32,8 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
         return Recipe.names.size
     }
 
-    class ListViewHolder(itemView:View): RecyclerView.ViewHolder(itemView), View.OnClickListener{
+
+    inner class ListViewHolder(itemView:View): RecyclerView.ViewHolder(itemView), View.OnClickListener{
 
 
         private var recipeText: TextView = itemView.findViewById(R.id.tv_recipe_name)
@@ -47,8 +49,9 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
             recipeText.text = Recipe.names[pos]
             recipeImage.setImageResource(Recipe.resourceIds[pos])
         }
-        override fun onClick(p0: View?) {
+        override fun onClick(view: View?) {
 
+            listener!!.onRecipeSelected(adapterPosition)
         }
 
     }
