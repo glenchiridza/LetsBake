@@ -13,11 +13,14 @@ class MainActivity : AppCompatActivity(),ListFragment.OnRecipeSelectedInterface 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val fragment: ListFragment = ListFragment()
-        val fragmentManager:FragmentManager = supportFragmentManager
-        val fragmentTransaction:FragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.add(R.id.value_holder,fragment)
-        fragmentTransaction.commit()
+        val savedFragment = supportFragmentManager.findFragmentById(R.id.value_holder)
+        if(savedFragment == null) {
+            val fragment = ListFragment()
+            val fragmentManager: FragmentManager = supportFragmentManager
+            val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.add(R.id.value_holder, fragment)
+            fragmentTransaction.commit()
+        }
 
     }
 
