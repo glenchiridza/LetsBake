@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.glencconnnect.bakingapp.fragments.ListFragment
+import com.glencconnnect.bakingapp.fragments.ViewPagerFragment
 import com.glencconnnect.bakingapp.models.Recipe
 
 class MainActivity : AppCompatActivity(),ListFragment.OnRecipeSelectedInterface {
@@ -25,6 +26,11 @@ class MainActivity : AppCompatActivity(),ListFragment.OnRecipeSelectedInterface 
     }
 
     override fun onRecipeSelected(index: Int) {
+        val fragment = ViewPagerFragment()
+        val fragmentManager: FragmentManager = supportFragmentManager
+        val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.value_holder, fragment)
+        fragmentTransaction.commit()gti
         Toast.makeText(this@MainActivity,Recipe.names[index],Toast.LENGTH_SHORT).show()
     }
 }
