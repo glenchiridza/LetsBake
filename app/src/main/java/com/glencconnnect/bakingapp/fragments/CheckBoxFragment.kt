@@ -13,10 +13,10 @@ import androidx.fragment.app.Fragment
 import com.glencconnnect.bakingapp.R
 import com.glencconnnect.bakingapp.models.Recipe
 
-class IngredientsFragment: Fragment() {
+abstract class CheckBoxFragment: Fragment() {
 
     companion object{
-        private val KEY_CHECKBOX: String = "key_checked_box"
+        private const val KEY_CHECKBOX: String = "key_checked_box"
     }
     private lateinit var checkBoxes:Array<CheckBox>
     override fun onCreateView(
@@ -25,34 +25,38 @@ class IngredientsFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val index:Int? = arguments?.getInt(ViewPagerFragment.KEY_RECIPE_INDEX)
-        val view:View = inflater.inflate(R.layout.fragment_ingredients,container,false)
 
-        val constraintLayout:LinearLayoutCompat = view.findViewById(R.id.ingredientsLayout)
-        var ingredients:List<String> = Recipe.ingredients[index!!].split("`")
+        val view:View = inflater.inflate(R.layout.fragment_checkbox,container,false)
 
-        checkBoxes = Array<CheckBox>(ingredients.size){CheckBox(context)}
+        val constraintLayout:LinearLayoutCompat = view.findViewById(R.id.checkboxesLayout)
+        var contents:List<String> = getContents(index)
+
+
+        checkBoxes = Array<CheckBox>(contents.size){CheckBox(context)}
         var checkedBoxes = BooleanArray(checkBoxes.size)
 
         if(savedInstanceState?.getBooleanArray(KEY_CHECKBOX) != null){
             checkedBoxes = savedInstanceState.getBooleanArray(KEY_CHECKBOX)!!
         }
 
-        setUpCheckBoxes(ingredients,constraintLayout,checkedBoxes)
+        setUpCheckBoxes(contents,constraintLayout,checkedBoxes)
 
         return view
     }
 
+    abstract fun getContents(index: Int?): List<String>
+
     private fun setUpCheckBoxes(
-        ingredients: List<String>,
+        contents: List<String>,
         container: ViewGroup,
         checkedBoxes: BooleanArray
     ) {
 
-        for ((i, ingredient) in ingredients.withIndex()) {
+        for ((i, content) in contents.withIndex()) {
             checkBoxes[i] = CheckBox(activity)
             checkBoxes[i].setPadding(8, 16, 8, 16)
             checkBoxes[i].textSize = 20f
-            checkBoxes[i].text = ingredient
+            checkBoxes[i].text = content
             container.addView(checkBoxes[i])
 
             if (checkedBoxes[i]) checkBoxes[i].toggle()

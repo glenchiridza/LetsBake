@@ -15,12 +15,11 @@ import com.glencconnnect.bakingapp.R
 import com.glencconnnect.bakingapp.models.Recipe
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import kotlinx.android.synthetic.main.fragment_viewpager.*
 
 class ViewPagerFragment:Fragment() {
 
     companion object{
-        val  KEY_RECIPE_INDEX = "recipe_index"
+       const val  KEY_RECIPE_INDEX = "recipe_index"
     }
 
     override fun onCreateView(

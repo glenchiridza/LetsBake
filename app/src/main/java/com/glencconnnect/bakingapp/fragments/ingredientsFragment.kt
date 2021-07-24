@@ -6,9 +6,9 @@ package com.glencconnnect.bakingapp.fragments
 import com.glencconnnect.bakingapp.models.Recipe
 
 
-class DirectionsFragment:CheckBoxFragment(){
+class IngredientsFragment:CheckBoxFragment(){
     override fun getContents(index: Int?): List<String> {
-        return Recipe.directions[index!!].split("`")
+        return Recipe.ingredients[index!!].split("`")
     }
 
 }
