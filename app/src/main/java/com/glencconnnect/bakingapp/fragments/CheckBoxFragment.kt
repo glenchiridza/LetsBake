@@ -3,6 +3,7 @@
  **/
 package com.glencconnnect.bakingapp.fragments
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -56,6 +57,7 @@ abstract class CheckBoxFragment: Fragment() {
             checkBoxes[i] = CheckBox(activity)
             checkBoxes[i].setPadding(8, 16, 8, 16)
             checkBoxes[i].textSize = 20f
+            checkBoxes[i].setTextColor(Color.DKGRAY)
             checkBoxes[i].text = content
             container.addView(checkBoxes[i])
 
