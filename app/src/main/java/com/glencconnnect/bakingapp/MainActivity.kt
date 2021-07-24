@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity(),ListFragment.OnRecipeSelectedInterface,
         val isTablet = resources.getBoolean(R.bool.is_tablet)
 
         if(!isTablet) {
-            val savedFragment = supportFragmentManager.findFragmentByTag(LIST_FRAGMENT) as ListFragment
+            val savedFragment = supportFragmentManager.findFragmentByTag(LIST_FRAGMENT)
             if (savedFragment == null) {
                 val fragment = ListFragment()
                 val fragmentManager: FragmentManager = supportFragmentManager
