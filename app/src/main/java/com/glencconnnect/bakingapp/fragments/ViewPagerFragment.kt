@@ -54,7 +54,7 @@ class ViewPagerFragment:Fragment() {
 
     override fun onStop() {
         super.onStop()
-        activity!!.title = resources.getString(R.string.app_name)
+        activity?.title = resources.getString(R.string.app_name)
     }
 
 }
